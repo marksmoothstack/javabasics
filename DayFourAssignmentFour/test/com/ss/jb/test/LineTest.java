@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -12,6 +13,7 @@ import com.ss.jb.four.Line;
 public class LineTest {
 
 	// Generate instances of four different lines
+	// x0, y0, x1, y1
 	Line line = new Line(2, 3, 4, 5);
 	Line line2 = new Line(2, 3, 4, 5);
 	Line line3 = new Line(21, 5, 3, 15);
@@ -29,7 +31,12 @@ public class LineTest {
 		assertNotEquals(1, line3.getSlope(), .0001);
 
 		// Test that method does not try to divide by zero
-		assertNotEquals(0, line4.getSlope(), .0001);
+		try {
+			line4.getSlope();
+			fail("Divided by 0.");
+		} catch (final Exception e){
+			assertTrue(true);
+		}
 	}
 
 	// Test getDistance()
@@ -37,10 +44,10 @@ public class LineTest {
 	public void getDistanceTest() {
 
 		// Check for correct distance
-		assertEquals(8, line.getDistance(), .0001);
+		assertEquals(0, line4.getDistance(), .0001);
 
 		// Ensure that a distance of eight is not always returned
-		assertNotEquals(8, line3.getDistance(), .0001);
+		assertNotEquals(0, line3.getDistance(), .0001);
 	}
 
 	// Test parallelTo()

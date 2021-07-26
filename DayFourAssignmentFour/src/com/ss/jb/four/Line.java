@@ -21,6 +21,7 @@ public class Line {
 
 	// calculate the distance of the line
 	public double getDistance() {
+		
 		return Math.sqrt((x1 - x0) * (x1 - x0) + (y1 - y0) * (y1 - y0));
 	}
 

@@ -167,18 +167,22 @@ public class Admin {
 		return;
 	}
 
-	// Shows flight table values
+	// Display flight table values for user
 	private void readFlight() throws SQLException {
 		System.out.println("Read Flights");
 
+		// Create service object to call read method through
 		AdminService aserv = new AdminService();
 		aserv.readFlight();
 
 		return;
 	}
 
+	// CRUD menu for passengers table
 	private void crudPassengers() throws SQLException {
 		System.out.println("Add/Update/Delete/Read Passengers");
+
+		// Passenger menu for user to make selection
 		while (true) {
 			System.out.println("1) Add");
 			System.out.println("2) Update");
@@ -186,8 +190,10 @@ public class Admin {
 			System.out.println("4) Read");
 			System.out.println("5) Quit to previous");
 
+			// Gather user's input
 			String input = this.scan.nextLine();
 
+			// Send user to sub menu based of selection or loop if invalid
 			if (input.equals("1")) {
 				addPassenger();
 			} else if (input.equals("2")) {
@@ -209,6 +215,7 @@ public class Admin {
 	private void addPassenger() throws SQLException {
 		System.out.println("Add Passenger");
 
+		// Create passenger object for data transfer
 		Passenger passenger = new Passenger();
 
 		System.out.println("Enter Booking ID:");
@@ -229,16 +236,18 @@ public class Admin {
 		System.out.println("Enter Address:");
 		passenger.setAddress(this.scan.nextLine());
 
+		// Create service object to handle object transfer to database
 		AdminService aserv = new AdminService();
 		aserv.addPassenger(passenger);
 
 		return;
 	}
 
-	// Collects data from user to update and existing passenger
+	// Collects data from user to update and existing passenger entry
 	private void updatePassenger() throws SQLException {
 		System.out.println("Update Passenger");
 
+		// Create passenger object for data transfer
 		Passenger passenger = new Passenger();
 
 		System.out.println("Enter ID:");
@@ -262,6 +271,7 @@ public class Admin {
 		System.out.println("Enter Address:");
 		passenger.setAddress(this.scan.nextLine());
 
+		// Create service object to handle object transfer to database
 		AdminService aserv = new AdminService();
 		aserv.updatePassenger(passenger);
 
@@ -272,11 +282,13 @@ public class Admin {
 	private void deletePassenger() throws SQLException {
 		System.out.println("Delete Passenger");
 
+		// Create passenger object for data transfer
 		Passenger passenger = new Passenger();
 
 		System.out.println("Enter Passenger ID:");
 		passenger.setId(this.scan.nextLine());
 
+		// Create service object to handle object transfer to database
 		AdminService aserv = new AdminService();
 		aserv.deletePassenger(passenger);
 
@@ -287,14 +299,18 @@ public class Admin {
 	private void readPassenger() throws SQLException {
 		System.out.println("Read Passengers");
 
+		// Create service object to call database method
 		AdminService aserv = new AdminService();
 		aserv.readPassenger();
 
 		return;
 	}
 
+	// CRUD menu for airport table
 	private void crudAirport() throws SQLException {
 		System.out.println("Add/Update/Delete/Read Airports");
+
+		// Display actions for user to select
 		while (true) {
 			System.out.println("1) Add");
 			System.out.println("2) Update");
@@ -302,6 +318,7 @@ public class Admin {
 			System.out.println("4) Read");
 			System.out.println("5) Quit to previous");
 
+			// Take in user input for selection or loop if invalid
 			String input = this.scan.nextLine();
 
 			if (input.equals("1")) {
@@ -321,10 +338,11 @@ public class Admin {
 
 	}
 
-	// Collects data from user to create a new airport
+	// Collects data from user to create a new airport entry
 	private void addAirport() throws SQLException {
 		System.out.println("Add Airport");
 
+		// Create data transfer object
 		Airport airport = new Airport();
 
 		System.out.println("Enter Airport Code: XXX");
@@ -333,16 +351,18 @@ public class Admin {
 		System.out.println("Enter City Name:");
 		airport.setCity(this.scan.nextLine());
 
+		// Create service object and pass data transfer object
 		AdminService aserv = new AdminService();
 		aserv.addAirport(airport);
 
 		return;
 	}
 
-	// Collects data from user to update and existing airport
+	// Collects data from user to update an existing airport row
 	private void updateAirport() throws SQLException {
 		System.out.println("Update Airport");
 
+		// Create data transfer object
 		Airport airport = new Airport();
 
 		System.out.println("Enter Airport Code: XXX");
@@ -351,21 +371,24 @@ public class Admin {
 		System.out.println("Enter City Name:");
 		airport.setCity(this.scan.nextLine());
 
+		// Create service object and pass data transfer object
 		AdminService aserv = new AdminService();
 		aserv.updateAirport(airport);
 
 		return;
 	}
 
-	// Collects data from user to delete and existing airport
+	// Collects data from user to delete and existing airport entry
 	private void deleteAirport() throws SQLException {
 		System.out.println("Delete Airport");
 
+		// Create data transfer object
 		Airport airport = new Airport();
 
 		System.out.println("Enter Airport Code: XXX");
 		airport.setAirportCode(this.scan.nextLine());
 
+		// Create service object and pass data transfer object
 		AdminService aserv = new AdminService();
 		aserv.deleteAirport(airport);
 
@@ -376,23 +399,30 @@ public class Admin {
 	private void readAirport() throws SQLException {
 		System.out.println("Read Airports");
 
+		// Create service layer object to run database command
 		AdminService aserv = new AdminService();
 		aserv.readAirport();
 
 		return;
 	}
 
+
+	// Ticket cancellation update
 	private void ticketCancelationOverRide() throws SQLException {
 		System.out.println("Over-ride Trip Cancellation");
 
+		// Create data transfer object
 		Booking booking = new Booking();
 
+		// Create service layer object and generate list of bookings
 		AdminService aserv = new AdminService();
 		aserv.readBooking();
 
+		// Collect desired entry for alteration
 		System.out.println("Enter ID of booking to over-ride:");
 		booking.setId(this.scan.nextLine());
 
+		// Create service layer object for update method
 		aserv.updateBooking(booking);
 		return;
 	};

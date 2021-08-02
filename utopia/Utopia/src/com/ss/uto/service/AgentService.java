@@ -36,4 +36,49 @@ public class AgentService {
 			}
 		}
 	}
+
+	public void readFlight() throws SQLException {
+		Connection conn = null;
+
+		try {
+			conn = connUtil.getConnection();
+
+			FlightDAO fdao = new FlightDAO(conn);
+
+			List<Flight> flist = fdao.readFlight();
+
+			for (Flight f : flist) {
+				System.out.println("Flight ID: " + f.getFlightID() + " | Departure Time: " + f.getDepartureTime()
+						+ " | Reserved Seats: " + f.getReservedSeats() + " | Seat Price: " + f.getSeatPrice());
+				
+				break;
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			conn.rollback();
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+	}
+	
+	public void updateFlight(Flight flight) throws SQLException {
+		Connection conn = null;
+
+		try {
+			conn = connUtil.getConnection();
+
+			FlightDAO fdao = new FlightDAO(conn);
+			fdao.updateFlight(flight);
+			System.out.println("Flight Updated!");
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+			conn.rollback();
+		} finally {
+			if (conn != null) {
+				conn.close();
+			}
+		}
+	}
 }

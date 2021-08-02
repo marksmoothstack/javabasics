@@ -9,8 +9,6 @@ public class Main {
 
 	public static void main(String[] args) throws SQLException {		
 		
-		AdminService aserv = new AdminService();
-		
 		Agent agent = new Agent();
 		Admin admin = new Admin();
 		Traveler traveler = new Traveler();
